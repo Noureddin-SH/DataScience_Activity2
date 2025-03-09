@@ -35,7 +35,7 @@ import numpy as np
 
 Key steps performed for data analysis:
 
-###1 Reading the CSV file containing PM sensor readings and Read the GeoJSON file containing neighborhood boundaries into a GeoDataFrame
+###1. Reading the CSV file containing PM sensor readings and Read the GeoJSON file containing neighborhood boundaries into a GeoDataFrame
 
 ```python
 # Step 1: Read the CSV file containing PM10 sensor readings
@@ -45,14 +45,14 @@ pm10_data = pd.read_csv('https://raw.githubusercontent.com/IsamAljawarneh/datase
 nyc_neighborhoods = gpd.read_file('https://raw.githubusercontent.com/IsamAljawarneh/datasets/master/data/nyc_polygon.geojson')
 ```
 
-###2 Converting the csv into a geodataframe and join it (sjoin) with the geojson, assign a coordinate reference system (CRS) the csv geodataframe which is identical to that of the geojson file, then perform the join, the result is a geodataframe, convert it to dataframe, and select pm10, neighborhood columns in a new dataframe
+###2. Converting the csv into a geodataframe and join it (sjoin) with the geojson, assign a coordinate reference system (CRS) the csv geodataframe which is identical to that of the geojson file, then perform the join, the result is a geodataframe, convert it to dataframe, and select pm10, neighborhood columns in a new dataframe
 
 ```python
 pm10_gdf = gpd.GeoDataFrame(pm10_data, geometry=gpd.points_from_xy(pm10_data.longitude, pm10_data.latitude))
 merged_data = gpd.sjoin(pm10_gdf, nyc_neighborhoods, how='inner', predicate='within')
 ```
 
-###3 Conversion of data from a pandas dataframes to numpy tables
+###3. Conversion of data from a pandas dataframes to numpy tables
 
 Dataframes were frequently converted to numpy tables for table abstractions. For example:
 
